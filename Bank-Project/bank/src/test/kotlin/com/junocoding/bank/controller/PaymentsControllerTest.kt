@@ -1,10 +1,12 @@
 package com.junocoding.bank.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.junocoding.bank.model.Payment
-import com.junocoding.bank.repository.PaymentsRepository
+import com.junocoding.bank.controller.model.NewTransactionModel
+import com.junocoding.bank.repository.TransactionDBModel
+import com.junocoding.bank.repository.TransferRepository
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
+import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -21,19 +23,19 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
 
     @MockkBean
-    private lateinit var paymentsRepository: PaymentsRepository
+    private lateinit var paymentsRepository: TransferRepository
 
     @Test
     fun `should get payment with success`() {
-        val payment = Payment(
-            value = 1.50,
-            date = Date(),
-            description = "store 1",
-            id = UUID.randomUUID(),
-            targetAccountId = 123
-        )
+        val mockTransaction = mockk<TransactionDBModel>().apply {
+            every { value } returns 1.50
+            every { description } returns "store 1"
+            every { accountIdentifier } returns "NL47INGB8845464385"
+            every { date } returns Date()
+            every { id } returns UUID.randomUUID()
+        }
 
-        every { paymentsRepository.findAll() } returns listOf(payment)
+        every { paymentsRepository.findAll() } returns listOf(mockTransaction)
 
         mockMvc.perform(get("/payments/all").accept(MediaType.APPLICATION_JSON))
             .andDo(print())
@@ -44,16 +46,16 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
 
     @Test
     fun `should submit payment with success`() {
-        val payment = Payment(
+        val transfer = NewTransactionModel(
             value = 1.50,
             description = "store 1",
-            targetAccountId = 123
+            targetAccount = "NL76ABNA2376059879"
         )
 
-        every { paymentsRepository.save(any()) } returns payment
+        every { paymentsRepository.save(any()) } returns mockk()
 
-        mockMvc.perform(post("/payments/submit")
-            .content(ObjectMapper().writeValueAsString(payment))
+        mockMvc.perform(post("/payments/new")
+            .content(ObjectMapper().writeValueAsString(transfer))
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andDo(print())
@@ -62,7 +64,7 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
 
     @Test
     fun `should return a bad request error`() {
-        mockMvc.perform(post("/payments/submit")
+        mockMvc.perform(post("/payments/new")
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andDo(print())
