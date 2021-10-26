@@ -1,6 +1,6 @@
 package com.junocoding.bank.controller
 
-import com.junocoding.bank.controller.model.NewTransactionModel
+import com.junocoding.bank.controller.model.TransactionModel
 import com.junocoding.bank.controller.model.OverviewTransactionModel
 import com.junocoding.bank.controller.model.convertToDBModel
 import com.junocoding.bank.controller.model.convertToOverviewTransactionModel
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*
 class TransferController(val repository: TransferRepository) {
 
     @PostMapping("/new")
-    fun newTransfer(@RequestBody newTransactionModel: NewTransactionModel) {
-        repository.save(newTransactionModel.convertToDBModel())
+    fun newTransfer(@RequestBody transactionModel: TransactionModel) {
+        repository.save(transactionModel.convertToDBModel())
     }
 
     @GetMapping("/all")

@@ -1,8 +1,8 @@
 package com.junocoding.bank.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.junocoding.bank.controller.model.NewTransactionModel
-import com.junocoding.bank.repository.TransactionDBModel
+import com.junocoding.bank.controller.model.TransactionModel
+import com.junocoding.bank.repository.model.TransactionDBModel
 import com.junocoding.bank.repository.TransferRepository
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
@@ -46,7 +46,7 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
 
     @Test
     fun `should submit payment with success`() {
-        val transfer = NewTransactionModel(
+        val transfer = TransactionModel(
             value = 1.50,
             description = "store 1",
             targetAccount = "NL76ABNA2376059879"

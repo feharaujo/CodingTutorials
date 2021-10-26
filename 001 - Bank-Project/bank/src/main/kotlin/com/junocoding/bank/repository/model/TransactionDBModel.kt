@@ -1,4 +1,4 @@
-package com.junocoding.bank.repository
+package com.junocoding.bank.repository.model
 
 import java.util.*
 import javax.persistence.Entity
@@ -16,6 +16,5 @@ class TransactionDBModel(
     var id: UUID? = null
         private set
 
-    var date: Date = Date()
-        private set
+    val date: Date = Date()
 }

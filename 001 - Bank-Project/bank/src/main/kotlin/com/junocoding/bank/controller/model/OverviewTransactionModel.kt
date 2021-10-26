@@ -1,6 +1,6 @@
 package com.junocoding.bank.controller.model
 
-import com.junocoding.bank.repository.TransactionDBModel
+import com.junocoding.bank.repository.model.TransactionDBModel
 import java.util.*
 
 class OverviewTransactionModel(

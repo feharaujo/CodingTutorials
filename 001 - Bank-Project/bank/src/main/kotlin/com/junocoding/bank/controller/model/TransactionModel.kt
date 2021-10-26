@@ -1,14 +1,14 @@
 package com.junocoding.bank.controller.model
 
-import com.junocoding.bank.repository.TransactionDBModel
+import com.junocoding.bank.repository.model.TransactionDBModel
 
-class NewTransactionModel(
+class TransactionModel(
     val targetAccount: String,
     val value: Double,
     val description: String = "",
 )
 
-fun NewTransactionModel.convertToDBModel() = TransactionDBModel(
+fun TransactionModel.convertToDBModel() = TransactionDBModel(
     accountIdentifier = this.targetAccount,
     value = this.value,
     description = this.description
