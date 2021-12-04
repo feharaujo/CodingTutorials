@@ -8,7 +8,7 @@ import com.junocoding.bank.repository.TransferRepository
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("/transfer")
 class TransferController(val repository: TransferRepository) {
 
     @PostMapping("/new")
