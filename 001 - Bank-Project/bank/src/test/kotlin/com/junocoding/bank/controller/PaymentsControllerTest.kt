@@ -37,7 +37,7 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
 
         every { paymentsRepository.findAll() } returns listOf(mockTransaction)
 
-        mockMvc.perform(get("/payments/all").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/transfer/all").accept(MediaType.APPLICATION_JSON))
             .andDo(print())
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -54,7 +54,7 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
 
         every { paymentsRepository.save(any()) } returns mockk()
 
-        mockMvc.perform(post("/payments/new")
+        mockMvc.perform(post("/transfer/new")
             .content(ObjectMapper().writeValueAsString(transfer))
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
@@ -64,7 +64,7 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
 
     @Test
     fun `should return a bad request error if the request there's no body`() {
-        mockMvc.perform(post("/payments/new")
+        mockMvc.perform(post("/transfer/new")
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andDo(print())
