@@ -26,7 +26,7 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
     private lateinit var paymentsRepository: TransferRepository
 
     @Test
-    fun `should get payment with success`() {
+    fun `should get transaction with success`() {
         val mockTransaction = mockk<TransactionDBModel>().apply {
             every { value } returns 1.50
             every { description } returns "store 1"
@@ -45,7 +45,7 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
     }
 
     @Test
-    fun `should submit payment with success`() {
+    fun `should submit transaction with success`() {
         val transfer = TransactionModel(
             value = 1.50,
             description = "store 1",
