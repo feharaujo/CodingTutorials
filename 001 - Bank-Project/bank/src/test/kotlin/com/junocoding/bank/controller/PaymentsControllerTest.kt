@@ -63,7 +63,7 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
     }
 
     @Test
-    fun `should return a bad request error`() {
+    fun `should return a bad request error if the request there's no body`() {
         mockMvc.perform(post("/payments/new")
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
