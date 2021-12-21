@@ -25,24 +25,6 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
     @MockkBean
     private lateinit var paymentsRepository: TransferRepository
 
-    @Test
-    fun `should get transaction with success`() {
-        val mockTransaction = mockk<TransactionDBModel>().apply {
-            every { value } returns 1.50
-            every { description } returns "store 1"
-            every { accountIdentifier } returns "NL47INGB8845464385"
-            every { date } returns Date()
-            every { id } returns UUID.randomUUID()
-        }
-
-        every { paymentsRepository.findAll() } returns listOf(mockTransaction)
-
-        mockMvc.perform(get("/transfer/all").accept(MediaType.APPLICATION_JSON))
-            .andDo(print())
-            .andExpect(status().isOk)
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("\$.[0].description").value("store 1"))
-    }
 
     @Test
     fun `should submit transaction with success`() {
@@ -60,6 +42,25 @@ class PaymentsControllerTest(@Autowired val mockMvc: MockMvc) {
             .accept(MediaType.APPLICATION_JSON))
             .andDo(print())
             .andExpect(status().isOk)
+    }
+
+    @Test
+    fun `should get transaction with success`() {
+        val mockTransaction = mockk<TransactionDBModel>().apply {
+            every { value } returns 1.50
+            every { description } returns "store 1"
+            every { accountIdentifier } returns "NL47INGB8845464385"
+            every { date } returns Date()
+            every { id } returns UUID.randomUUID()
+        }
+
+        every { paymentsRepository.findAll() } returns listOf(mockTransaction)
+
+        mockMvc.perform(get("/transfer/all").accept(MediaType.APPLICATION_JSON))
+            .andDo(print())
+            .andExpect(status().isOk)
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("\$.[0].description").value("store 1"))
     }
 
     @Test
