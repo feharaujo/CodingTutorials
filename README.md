@@ -1,4 +1,6 @@
 # Juno Coding Projects
-Sample projects for the Medium and Youtube Channel **Juno Coding**.
+Sample projects for the Blog and Youtube Channel **Backend Horizon**.
 
-www.junocoding.com
+www.backendhorizon.com
+
+https://www.youtube.com/@backendhorizon
