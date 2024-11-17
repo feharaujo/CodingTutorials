@@ -1,0 +1,24 @@
+{
+    "communications": [
+        {
+            "type": "EMAIL",
+            "payload": {
+                "to": "test@test.com",
+                "subject": "Welcome!",
+                "content": "This is a email test!"
+            }
+        }, {
+            "type": "SMS",
+            "payload": {
+                "to": "+310610001234",
+                "content": "This is a SMS test"
+            }
+        }, {
+            "type": "SMS",
+            "payload": {
+                "to": "+310610001234",
+                "content": "This is another message"
+            }
+        }
+    ]
+}

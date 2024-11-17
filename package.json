@@ -1,0 +1,32 @@
+{
+  "name": "step-functions-example",
+  "version": "0.1.0",
+  "bin": {
+    "step-functions-examples": "bin/step-functions-example.js"
+  },
+  "scripts": {
+    "build": "npm run clean:dist && npm run tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "tsc": "tsc",
+    "clean:dist": "rm -rf ./dist",
+    "deploy": "npm run cdk -- deploy --all --require-approval never",
+    "destroy": "npm run cdk -- destroy --all"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "22.7.9",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "aws-cdk": "2.166.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.6.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.166.0",
+    "constructs": "^10.0.0",
+    "esbuild": "^0.24.0",
+    "source-map-support": "^0.5.21"
+  }
+}
