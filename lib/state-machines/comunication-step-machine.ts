@@ -1,6 +1,6 @@
 import { Duration, StackProps } from "aws-cdk-lib";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
-import { Choice, Condition, DefinitionBody, Fail, JsonPath, Map, Pass, RetryProps, StateMachine, StateMachineType } from "aws-cdk-lib/aws-stepfunctions";
+import { Choice, Condition, DefinitionBody, Fail, JsonPath, Map, Pass, RetryProps, StateMachine, StateMachineType, TaskInput } from "aws-cdk-lib/aws-stepfunctions";
 import { LambdaInvoke } from "aws-cdk-lib/aws-stepfunctions-tasks";
 import { Construct } from "constructs";
 
@@ -9,20 +9,21 @@ interface CommunicationStateMachineProps extends StackProps {
     emailLambda: NodejsFunction
     smsLambda: NodejsFunction
     analyticsLambda: NodejsFunction
+    readContentLambda: NodejsFunction
 }
 
 export class CommunicationStateMachine extends StateMachine {
     constructor(scope: Construct, id: string, props: CommunicationStateMachineProps) {
 
-        const { emailLambda, smsLambda, analyticsLambda } = createLambdaInvokes(scope, props)
+        const { emailLambda, smsLambda, analyticsLambda, readContentLambda } = createLambdaInvokes(scope, props)
 
         // 1. Validate if communications key is in the payload
-        const isCommmunicationsPresent = Condition.isPresent('$.communications')
+        const isCommmunicationsPresent = Condition.isPresent('$.Payload.communications')
 
         // 3. Process communication concurrently
         const processBatchMap = new Map(scope, 'Process batch', {
             maxConcurrency: 2,
-            itemsPath: JsonPath.stringAt('$.communications'),
+            itemsPath: JsonPath.stringAt('$.Payload.communications'),
             resultPath: '$.processed'
         })
 
@@ -36,7 +37,9 @@ export class CommunicationStateMachine extends StateMachine {
         communicationsValidation.when(isCommmunicationsPresent, processBatchMap)
             .otherwise(new Fail(scope, 'Communications not found'))
 
-        const definition = communicationsValidation
+        readContentLambda.next(communicationsValidation)
+
+        const definition = readContentLambda
 
         super(scope, id, {
             definition,
@@ -60,22 +63,27 @@ export class CommunicationStateMachine extends StateMachine {
                 interval: Duration.seconds(10)
             }
             
-            const emailLambda = new LambdaInvoke(scope, 'emailLambda', {
+            const emailLambda = new LambdaInvoke(scope, 'Email Lambda', {
                 lambdaFunction: props.emailLambda,
                 outputPath: '$',
             }).addRetry(retryOnFailure)
 
-            const smsLambda = new LambdaInvoke(scope, 'smsLambda', {
+            const smsLambda = new LambdaInvoke(scope, 'SMS Lambda', {
                 lambdaFunction: props.smsLambda,
                 outputPath: '$',
             }).addRetry(retryOnFailure)
 
-            const analyticsLambda = new LambdaInvoke(scope, 'analyticsLambda', {
+            const analyticsLambda = new LambdaInvoke(scope, 'Analytics Lambda', {
                 lambdaFunction: props.analyticsLambda,
                 outputPath: '$'
             }).addRetry(retryOnFailure)
 
-            return { emailLambda, smsLambda, analyticsLambda }
+            const readContentLambda = new LambdaInvoke(scope, 'Read S3 Content Lambda', {
+                lambdaFunction: props.readContentLambda,
+                outputPath: '$',
+            })
+
+            return { emailLambda, smsLambda, analyticsLambda, readContentLambda }
         }
     }
 }
