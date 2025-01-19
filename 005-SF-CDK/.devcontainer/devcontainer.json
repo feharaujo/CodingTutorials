@@ -1,0 +1,17 @@
+{
+    "name": "sf-example",
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm",
+    "features": {
+        "ghcr.io/devcontainers/features/aws-cli:1": {},
+        "ghcr.io/devcontainers-contrib/features/aws-cdk:2": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "eamodio.gitlens",
+                "humao.rest-client"
+            ]
+        }
+    },
+    "remoteUser": "root"
+}

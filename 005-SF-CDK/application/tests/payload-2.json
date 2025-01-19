@@ -1,0 +1,192 @@
+{
+  "communications": [
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "john.smith@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310612345678",
+        "content": "This is a SMS test"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "alice.jones@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310623456789",
+        "content": "This is another message"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "bob.wilson@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310634567890",
+        "content": "This is a SMS test"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "emma.brown@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310645678901",
+        "content": "This is another message"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "michael.davis@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310656789012",
+        "content": "This is a SMS test"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "sarah.miller@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310667890123",
+        "content": "This is another message"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "david.taylor@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310678901234",
+        "content": "This is a SMS test"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "emily.anderson@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310689012345",
+        "content": "This is another message"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "james.wilson@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310690123456",
+        "content": "This is a SMS test"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "olivia.martin@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310601234567",
+        "content": "This is another message"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "william.brown@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310612345670",
+        "content": "This is a SMS test"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "sophia.clark@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    },
+    {
+      "type": "SMS",
+      "payload": {
+        "to": "+310623456781",
+        "content": "This is another message"
+      }
+    },
+    {
+      "type": "EMAIL",
+      "payload": {
+        "to": "daniel.white@example.com",
+        "subject": "Welcome!",
+        "content": "This is a email test!"
+      }
+    }
+  ]
+}
